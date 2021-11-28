@@ -111,6 +111,9 @@
    * Activate/show sections on load with hash links
    */
   window.addEventListener('load', () => {
+
+    window.location.href = '#about';
+
     if (window.location.hash) {
       let initial_nav = select(window.location.hash)
 
@@ -129,13 +132,15 @@
         })
 
         setTimeout(function() {
-          initial_nav.classList.add('section-show')
+          initial_nav.classList.add('section-show');
         }, 350);
 
         scrollto(window.location.hash)
       }
     }
   });
+
+
 
   /**
    * Skills animation
