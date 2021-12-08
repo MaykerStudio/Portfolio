@@ -112,7 +112,8 @@
    */
   window.addEventListener('load', () => {
 
-    window.location.href = '#about';
+    if(!window.location.hash)
+      window.location.href = '#about';
 
     if (window.location.hash) {
       let initial_nav = select(window.location.hash)
