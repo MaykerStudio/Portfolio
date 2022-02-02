@@ -112,7 +112,7 @@
    */
   window.addEventListener('load', () => {
 
-    if(!window.location.hash)
+    if(!window.location.hash && window.location.pathname.includes("/index.html"))
       window.location.href = '#about';
 
     if (window.location.hash) {
