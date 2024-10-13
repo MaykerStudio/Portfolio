@@ -51,13 +51,13 @@ var pieColor = "#09872b";
 
 // donut 1
 var chDonutData1 = {
-    labels: ['C#', 'Python', 'Java'],
+    labels: ['Programming', 'Generalist', 'Designer'],
     datasets: [
       {
         backgroundColor: pieColor,
         borderWidth: 2,
         borderColor: "black",
-        data: [100, 50, 75],
+        data: [100, 50, 25],
       }
     ]
 };
