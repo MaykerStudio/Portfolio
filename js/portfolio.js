@@ -22,58 +22,140 @@
   }
   // #endregion
 
+  // #region Google Drive helper
+  function getGoogleDriveId(src) {
+    const patterns = [
+      /\/file\/d\/([^/]+)/,
+      /[?&]id=([^&]+)/,
+      /\/d\/([^/]+)/
+    ];
+    for (const re of patterns) {
+      const m = src.match(re);
+      if (m) return m[1];
+    }
+    return null;
+  }
+
+  function getGoogleDriveThumbnail(src, size = 'w1280') {
+    const id = getGoogleDriveId(src);
+    if (!id) return '';
+    return `https://drive.google.com/thumbnail?id=${id}&sz=${size}`;
+  }
+
+  function getGoogleDriveEmbedUrl(src) {
+    const id = getGoogleDriveId(src);
+    if (!id) return '';
+    return `https://drive.google.com/file/d/${id}/preview`;
+  }
+  // #endregion
+
   // #region Project Card Rendering
   function renderProjectCards() {
-    const grid = document.getElementById('projects-grid');
 
-    if (!grid || !window.PROJECTS) return;
+    const grids = {
+      featured: document.getElementById('projects-grid'),
+      showcase: document.getElementById('showcase-grid'),
+      archive: document.getElementById('archive-grid')
+    };
 
-    grid.innerHTML = window.PROJECTS
-      .map(p => {
-        const carouselImages = p.media
-          .map(m => {
-            if (!m.type || m.type === 'image') return m.src;
-            if (m.type === 'youtube') {
-              return m.thumb || getYoutubeThumbnail(m.src, 'hq');
-            }
-            return null;
-          })
-          .filter(Boolean);
+    if (!window.PROJECTS) return;
 
-        const firstBg = carouselImages[0] || '';
-
-        return `
-<div class="project-card reveal" data-project-id="${p.id}">
-  <div class="project-media" data-project-preview data-carousel-images='${JSON.stringify(carouselImages)}' style="background-image: url('${firstBg}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-  </div>
-  <div class="project-content">
-    <div class="project-tag">${p.category}</div>
-    <h3>${p.title}</h3>
-    <p>${p.description}</p>
-    <div class="tech-stack">
-      ${p.stack.map(t => `<div class="tech-pill">${t}</div>`).join('')}
-    </div>
-    <button class="btn-view-project">View Details →</button>
-  </div>
-</div>`;
-      })
-      .join('');
-
-    grid.querySelectorAll('.project-media').forEach(media => {
-      const img = new Image();
-      img.onload = () => { };
-      img.onerror = () => {
-        const current = media.style.backgroundImage;
-        media.style.backgroundImage = current.replace('maxresdefault', 'hqdefault');
-      };
-      const bg = media.style.backgroundImage
-        .replace(/url\(["']?/, '')
-        .replace(/["']?\)/, '');
-      img.src = bg;
+    Object.values(grids).forEach(grid => {
+      if (grid) {
+        grid.innerHTML = '';
+      }
     });
 
-    grid.querySelectorAll('.reveal').forEach(el => {
-      gsap.set(el, { opacity: 0, y: 40 });
+    window.PROJECTS.forEach(p => {
+
+      const section =
+        p.section || 'featured';
+
+      const grid =
+        grids[section];
+
+      if (!grid) return;
+
+      const carouselImages = p.media
+        .map(m => {
+
+          if (!m.type || m.type === 'image') {
+            return m.src;
+          }
+
+          if (m.type === 'youtube') {
+            return m.thumb || getYoutubeThumbnail(m.src);
+          }
+
+          if (m.type === 'gdrive') {
+            return m.thumb || getGoogleDriveThumbnail(m.src, 'w1280');
+          }
+
+          return null;
+        })
+        .filter(Boolean);
+
+      const firstBg =
+        carouselImages[0] || '';
+
+      grid.innerHTML += `
+      <div class="project-card reveal" data-project-id="${p.id}">
+        
+        <div
+          class="project-media"
+          data-project-preview
+          data-carousel-images='${JSON.stringify(carouselImages)}'
+          style="
+            background-image: url('${firstBg}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+          ">
+        </div>
+
+        <div class="project-content">
+
+          <div class="project-card-tags">
+
+            <div class="project-tag">
+              ${p.category}
+            </div>
+
+            ${p.legacy ? `
+              <div class="project-legacy-tag">
+                Archive · ${p.legacyYear || 'Older Work'}
+              </div>
+            ` : ''}
+
+          </div>
+
+          <h3>${p.title}</h3>
+
+          <p>${p.description}</p>
+
+          <div class="tech-stack">
+            ${(p.stack || [])
+          .map(t => `<div class="tech-pill">${t}</div>`)
+          .join('')}
+          </div>
+
+          <button class="btn-view-project">
+            View Details →
+          </button>
+
+        </div>
+
+      </div>
+    `;
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+
+      gsap.set(el, {
+        opacity: 0,
+        y: 40
+      });
+
       gsap.to(el, {
         opacity: 1,
         y: 0,
@@ -86,9 +168,15 @@
       });
     });
 
-    grid.querySelectorAll('[data-project-id]').forEach(card => {
+    document.querySelectorAll('[data-project-id]').forEach(card => {
+
       card.addEventListener('click', () => {
-        const project = window.PROJECTS.find(p => p.id === card.dataset.projectId);
+
+        const project =
+          window.PROJECTS.find(
+            p => p.id === card.dataset.projectId
+          );
+
         if (project && modalInstance) {
           modalInstance.open(project);
         }
@@ -98,81 +186,109 @@
 
   let previewIntervals = [];
 
-  function InitializeProjectPreviewCarousel() {
+  // Sets a layer's background and probes for maxres → hq fallback
+  const thumbnailCache = new Map();
 
+  function setLayerBackground(layer, src) {
+
+    if (!src.includes('maxresdefault')) {
+      layer.style.backgroundImage = `url('${src}')`;
+      return;
+    }
+
+    if (thumbnailCache.has(src)) {
+      layer.style.backgroundImage =
+        `url('${thumbnailCache.get(src)}')`;
+      return;
+    }
+
+    const probe = new Image();
+
+    probe.onload = () => {
+
+      const finalSrc =
+        probe.naturalWidth <= 120
+          ? src.replace('maxresdefault', 'hqdefault')
+          : src;
+
+      thumbnailCache.set(src, finalSrc);
+
+      layer.style.backgroundImage =
+        `url('${finalSrc}')`;
+    };
+
+    probe.onerror = () => {
+
+      const fallback =
+        src.replace('maxresdefault', 'hqdefault');
+
+      thumbnailCache.set(src, fallback);
+
+      layer.style.backgroundImage =
+        `url('${fallback}')`;
+    };
+
+    probe.src = src;
+  }
+
+  function InitializeProjectPreviewCarousel() {
     stopAllPreviewCarousels();
 
-    const previews =
-      document.querySelectorAll(
-        '[data-project-preview]'
-      );
+    document.querySelectorAll('[data-project-preview]').forEach(preview => {
+      const images = JSON.parse(preview.dataset.carouselImages);
+      if (!images || images.length <= 1) return;
 
-    previews.forEach(preview => {
+      preview.style.position = 'relative';
+      preview.style.backgroundImage = '';
 
-      const images =
-        JSON.parse(
-          preview.dataset.carouselImages
-        );
-
-      if (
-        !images ||
-        images.length <= 1
-      )
-        return;
-
-      let current = 0;
-
-      const update = () => {
-
-        preview.style.backgroundImage =
-          `url('${images[current]}')`;
-
-        preview.style.backgroundSize =
-          'cover';
-
-        preview.style.backgroundPosition =
-          'center';
-
-        preview.style.backgroundRepeat =
-          'no-repeat';
-
+      const createLayer = (src, z) => {
+        const el = document.createElement('div');
+        el.style.cssText = `
+          position: absolute; inset: 0;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          transition: opacity 0.8s ease;
+          z-index: ${z};
+        `;
+        setLayerBackground(el, src);
+        return el;
       };
 
-      update();
+      let current = 0;
+      const layerA = createLayer(images[0], 1);
+      const layerB = createLayer(images[1] || images[0], 2);
+      layerB.style.opacity = '0';
 
-      const interval =
-        setInterval(() => {
+      preview.appendChild(layerA);
+      preview.appendChild(layerB);
 
-          current =
-            (current + 1)
-            % images.length;
+      let front = layerA, back = layerB;
 
-          update();
+      const interval = setInterval(() => {
+        current = (current + 1) % images.length;
 
-        }, 2000);
+        setLayerBackground(back, images[current]);
+        back.style.zIndex = '2';
+        back.style.opacity = '1';
 
-      previewIntervals.push(
-        interval
-      );
+        front.style.zIndex = '1';
+        front.style.opacity = '0';
 
+        [front, back] = [back, front];
+      }, 2500);
+
+      previewIntervals.push(interval);
     });
-
   }
 
   function stopAllPreviewCarousels() {
-
-    previewIntervals.forEach(
-      clearInterval
-    );
-
+    previewIntervals.forEach(clearInterval);
     previewIntervals = [];
-
   }
 
   function startAllPreviewCarousels() {
-
     InitializeProjectPreviewCarousel();
-
   }
   // #endregion
 
@@ -270,7 +386,17 @@
                 <button class="modal-close js-close" aria-label="Close">&#10005;</button>
               </div>
               <p class="modal-desc"></p>
-              <div class="modal-role"></div>
+              <div class="modal-legacy-note"></div>
+              <div>
+                <h3 class="modal-section-label">Links</h3>
+                 <div class="modal-links"></div>
+              </div>
+
+              <div>
+               <h3 class="modal-section-label">Role</h3>
+               <div class="modal-role"></div>
+              </div>
+              
               <div>
                 <div class="modal-section-label">Tech Stack</div>
                 <div class="modal-stack"></div>
@@ -289,7 +415,6 @@
                   <p class="modal-cs-text js-solution"></p>
                 </div>
               </div>
-              <div class="modal-links"></div>
             </div>
           </div>
         </div>
@@ -317,7 +442,6 @@
     }
 
     open(project) {
-      // Stop background carousels on project cards
       stopAllPreviewCarousels();
 
       this._carouselIndex = 0;
@@ -333,7 +457,6 @@
       this.overlay.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
 
-      // Re-apply background styles and resume carousels
       startAllPreviewCarousels();
     }
 
@@ -352,15 +475,63 @@
       this.overlay.querySelector('.modal-highlights').innerHTML =
         (p.highlights || []).map(h => `<div class="modal-highlight-item">${h}</div>`).join('');
 
-      const links = p.links || {};
-      this.overlay.querySelector('.modal-links').innerHTML =
-        Object.entries(links)
-          .filter(([, v]) => v)
+      const linksContainer =
+        this.overlay.querySelector('.modal-links');
+
+      const links =
+        Object.entries(p.links || {})
+          .filter(([, v]) => v);
+
+      linksContainer.style.display =
+        links.length ? 'flex' : 'none';
+
+      linksContainer.innerHTML =
+        links
           .map(([k, v]) => {
-            const label = k.charAt(0).toUpperCase() + k.slice(1);
-            const isPrimary = k === 'demo' ? ' is-primary' : '';
-            return `<a href="${v}" class="modal-link-btn${isPrimary}" target="_blank" rel="noopener noreferrer">${label}</a>`;
-          }).join('');
+
+            const label =
+              k.charAt(0).toUpperCase()
+              + k.slice(1);
+
+            const isPrimary =
+              k === 'demo'
+                ? ' is-primary'
+                : '';
+
+            return `
+        <a
+          href="${v}"
+          class="modal-link-btn${isPrimary}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ${label}
+        </a>
+      `;
+          })
+          .join('');
+
+
+      const legacy =
+        this.overlay.querySelector('.modal-legacy-note');
+
+      if (p.legacy) {
+        legacy.style.display = 'block';
+
+        legacy.innerHTML = `
+        <div class="modal-legacy-title">
+          Archive Project · ${p.legacyYear || ''}
+        </div>
+
+        <div class="modal-legacy-text">
+          This project represents earlier work and is kept in the portfolio for historical context. It does not reflect my current production quality, technical standards, or workflow.
+        </div>
+      `;
+      }
+      else {
+        legacy.style.display = 'none';
+        legacy.innerHTML = '';
+      }
 
       this._buildCarousel(p.media || []);
     }
@@ -368,6 +539,7 @@
     _buildCarousel(media) {
       this._mediaCount = media.length;
       this._youtubeLoaded = new Array(media.length).fill(false);
+      this._gdriveLoaded = new Array(media.length).fill(false);
 
       this._track.innerHTML = media.map((m, i) => {
         if (m.type === 'video') {
@@ -375,6 +547,9 @@
         }
         if (m.type === 'youtube') {
           return `<div class="carousel-item youtube-placeholder" data-youtube-src="${m.src}" data-index="${i}"></div>`;
+        }
+        if (m.type === 'gdrive') {
+          return `<div class="carousel-item gdrive-placeholder" data-gdrive-src="${m.src}" data-index="${i}"></div>`;
         }
         return `<div class="carousel-item"><img src="${m.src}" alt="${m.alt || ''}" loading="lazy" style="width:100%; height:100%; object-fit: cover;"></div>`;
       }).join('');
@@ -390,6 +565,7 @@
       this._carouselIndex = 0;
       this._render();
       this._loadYoutubeSlide(0);
+      this._loadGdriveSlide(0);
     }
 
     _render() {
@@ -398,6 +574,7 @@
         dot.classList.toggle('is-active', i === this._carouselIndex);
       });
       this._loadYoutubeSlide(this._carouselIndex);
+      this._loadGdriveSlide(this._carouselIndex);
     }
 
     _loadYoutubeSlide(index) {
@@ -421,6 +598,31 @@
       placeholder.appendChild(iframe);
       placeholder.classList.remove('youtube-placeholder');
       this._youtubeLoaded[index] = true;
+    }
+
+    _loadGdriveSlide(index) {
+      if (this._gdriveLoaded[index]) return;
+      const placeholder = this._track.querySelector(`.gdrive-placeholder[data-index="${index}"]`);
+      if (!placeholder) return;
+
+      const src = placeholder.dataset.gdriveSrc;
+      const embedUrl = getGoogleDriveEmbedUrl(src);
+      if (!embedUrl) return;
+
+      const iframe = document.createElement('iframe');
+      iframe.src = embedUrl;
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allow', 'autoplay');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.setAttribute('title', 'Google Drive media');
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      iframe.style.border = 'none';
+
+      placeholder.innerHTML = '';
+      placeholder.appendChild(iframe);
+      placeholder.classList.remove('gdrive-placeholder');
+      this._gdriveLoaded[index] = true;
     }
 
     _go(dir) {
