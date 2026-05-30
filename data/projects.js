@@ -7,19 +7,19 @@ const SKILLS = {
     items: [
       {
         name: 'Combat',
-        desc: 'Responsive combat—timing, detection, and feedback that make hits feel weighty and encounters flow without hiccups.'
+        desc: 'Combat systems focusing on timing, detection, and feedback to ensure hits feel weighty and encounters flow.'
       },
       {
         name: 'Movement',
-        desc: 'Fine-tuning controllers, platforming, and aerial handling so characters feel precise and never sluggish.'
+        desc: 'Controllers, platforming, and aerial handling tuned for precision.'
       },
       {
         name: 'Gameplay Logic',
-        desc: 'State-driven mechanics and shared systems that bend instead of breaking when the design shifts.'
+        desc: 'State-driven mechanics and shared systems built to withstand design shifts.'
       },
       {
         name: 'Player Experience',
-        desc: 'Closing the gap between intention and action with careful input handling and constant playtesting.'
+        desc: 'Input handling and iterative playtesting to align player intention with action.'
       }
     ]
   },
@@ -28,19 +28,19 @@ const SKILLS = {
     items: [
       {
         name: 'Enemy AI',
-        desc: 'Telegraphing attacks, controlling pace, and giving each enemy a personality that makes combat feel fair and reactive.'
+        desc: 'Attack telegraphing and pacing that give enemies a distinct personality.'
       },
       {
         name: 'AI Tools',
-        desc: 'Node-based editors that let designers sketch out enemy logic fast, keeping the code side out of the way.'
+        desc: 'Node-based editors for sketching enemy logic without touching code.'
       },
       {
         name: 'Game Systems',
-        desc: 'Growing systems without the tangled dependencies—adding features shouldn’t mean rewriting everything.'
+        desc: 'Decoupled systems that allow new features without rewriting core logic.'
       },
       {
         name: 'Debugging',
-        desc: 'Real-time inspectors and visualizers that show you exactly what the AI is thinking, cutting out the guesswork.'
+        desc: 'Real-time inspectors and visualizers to monitor AI decision making.'
       }
     ]
   },
@@ -49,15 +49,15 @@ const SKILLS = {
     items: [
       {
         name: 'Unity Editor Tools',
-        desc: 'Custom inspectors, wizards, and automations that replace repetitive clicks with one button—and fewer headaches.'
+        desc: 'Custom inspectors, wizards, and automations to reduce repetitive manual tasks.'
       },
       {
         name: 'Production Workflows',
-        desc: 'Pipelines that move fast but don’t break existing content, so the team can iterate without fear.'
+        desc: 'Pipelines that support rapid iteration without breaking existing content.'
       },
       {
         name: 'Code Structure',
-        desc: 'Writing code that stays readable and loosely coupled, so extending it later doesn’t turn into a rebuild.'
+        desc: 'Readable, loosely coupled code that simplifies future extensions.'
       }
     ]
   },
@@ -66,15 +66,15 @@ const SKILLS = {
     items: [
       {
         name: 'Technical VFX',
-        desc: 'Gameplay-triggered effects built with shaders, particles, and procedural tricks—all tuned for clarity and style.'
+        desc: 'Gameplay effects using shaders, particles, and procedural tricks for clarity and style.'
       },
       {
         name: 'Shaders',
-        desc: 'Shader Graph for interactive feedback, stylized looks, and visual beats that don’t tank the framerate.'
+        desc: 'Shader Graph for interactive feedback and stylized visuals that maintain performance.'
       },
       {
         name: 'Optimization',
-        desc: 'Profiling, batching, and stripping out waste so the pretty stuff stays performant on real hardware.'
+        desc: 'Profiling, batching, and resource stripping for target hardware.'
       }
     ]
   }
@@ -154,7 +154,7 @@ window.PROJECTS = [
     subtitle: 'Hand-Drawn Character-Switching Metroidvania',
     category: 'Exploration & Gameplay Systems',
     description:
-      'A 2D metroidvania with a hand-drawn look, built around swapping characters on the fly. Each one brings unique abilities, and the world’s puzzles and gates are tied to how you combine them. Progression reshapes the map and the way you think about moving through it.',
+      'A 2D metroidvania centered on swapping characters. Each character provides unique abilities that open new paths and solve puzzles. Progression changes how you navigate the map.',
     media: [
       { type: 'youtube', src: 'https://www.youtube.com/embed/qYpyj4MyI8Q', alt: 'Rat Trap — Trailer' },
       { type: 'image', src: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2723000/ss_ab03b1dce7b15c044a25b99ac61cd51dd90ad749.1920x1080.jpg?t=1770772434', alt: 'Rat Trap — Character Art' },
@@ -166,16 +166,16 @@ window.PROJECTS = [
     ],
     role: 'Lead Programmer',
     highlights: [
-      'Character switching that feels instant, with shared controls and per-character states that never conflict.',
-      'Exploration systems that handle gating and open new paths as abilities unlock.',
-      'A puzzle framework built from reusable interactions, letting designers cook up unexpected combinations.',
-      'Modular architecture so we could iterate fast and scale content without tearing the code apart.',
-      'Hooks for designers to tune progression and pacing on their own, while I kept the engine clean.'
+      'Instant character switching with shared controls and isolated state management.',
+      'Exploration systems that handle gating and ability-based progression.',
+      'A puzzle framework based on reusable interactions for varied combinations.',
+      'Modular architecture to support rapid content scaling.',
+      'Designer-facing hooks for progression tuning.'
     ],
     challenge:
-      'We needed character switching that felt natural, but also had to support a sprawling map, puzzle logic, and future mechanics—without turning into a tangled web of dependencies.',
+      'I needed to implement character switching that felt natural while supporting a large map and complex puzzle logic without creating a mess of dependencies.',
     solution:
-      'I built the systems around modular state ownership and interaction patterns. Each character brought something fresh while sharing a unified control scheme and a flexible puzzle layer, so adding new abilities didn’t break existing ones.',
+      'I used modular state ownership and interaction patterns. This allowed characters to share a control scheme while keeping their abilities and puzzle interactions independent.',
     links: { steam: 'https://store.steampowered.com/app/2723000/RAT_TRAP/' },
   }),
 
@@ -185,7 +185,7 @@ window.PROJECTS = [
     subtitle: 'Fluid Menu Systems & Player-Focused UX',
     category: 'UI Systems & Workflow Design',
     description:
-      'I shaped Rat Trap’s menus to feel immediate and unobtrusive. Players hop between screens as quickly as they explore the world, with no jarring pauses or clutter.',
+      'I developed the menu systems for Rat Trap to minimize friction. Players navigate screens quickly without jarring pauses or visual clutter.',
     media: [
       { type: 'youtube', src: 'https://www.youtube.com/embed/3m1ZSweGH8k', alt: 'Rat Trap — Multitab Menu' },
       { type: 'youtube', src: 'https://www.youtube.com/embed/0oq6bbv5pY0', alt: 'Rat Trap — Progress Screen' },
@@ -196,17 +196,17 @@ window.PROJECTS = [
     stack: ['Unity', 'C#', 'UI Systems', 'UX Design', 'Animation', 'Tooling'],
     role: 'Lead Programmer',
     highlights: [
-      'Reusable menu architecture that behaves the same way on every screen, no matter how complex the data gets.',
-      'UI flows that keep the player in the action—navigating menus feels just as responsive as combat.',
-      'Transitions and micro-interactions that are snappy and clearly show what’s happening at all times.',
-      'Structures built to absorb new features later without a full redesign.',
-      'Tightly coupled UI and gameplay states so navigation is always predictable.'
+      'Reusable menu architecture that handles complex data consistently across screens.',
+      'Responsive UI flows that maintain game momentum.',
+      'Snappy transitions and micro-interactions for clear feedback.',
+      'Extensible structures that support new features without redesigns.',
+      'Tightly coupled UI and gameplay states for predictable navigation.'
     ],
     challenge:
-      'Menus in a metroidvania can yank you out of the experience. The trick was making them powerful enough to handle complex data but light enough to never feel like a roadblock.',
+      'Metroidvania menus often disrupt the experience. I wanted them to handle complex data without becoming a roadblock to the player.',
     solution:
-      'I designed modular screens with a strict navigation contract and lightweight transitions. That gave us a menu system that stays out of the way, scales without pain, and keeps the player’s attention where it belongs.',
-    links: {}
+      'I designed modular screens with a strict navigation contract and lightweight transitions. The resulting system is scalable and stays out of the way.',
+    links: { steam: 'https://store.steampowered.com/app/2723000/RAT_TRAP/' },
   }),
 
   createProject({
@@ -215,23 +215,32 @@ window.PROJECTS = [
     subtitle: 'Gameplay-Driven VFX & Visual Feedback Systems',
     category: 'Technical VFX & Gameplay Systems',
     description:
-      'Making gameplay and VFX work as one. This project uses timing, motion, and layered visuals to amplify every action, staying performant and easy for a team to iterate on.',
+      'This project integrates gameplay and VFX using timing and layered visuals to amplify actions while remaining performant for team iteration.',
     media: [
-      { type: 'gdrive', src: 'https://drive.google.com/file/d/1hHC6bvHYHPV1CZFyaQ7ytlXGNQ-AirDH/view?usp=drive_link', alt: 'Companion Form VFX — Showcase' },
-      { type: 'gdrive', src: 'https://drive.google.com/file/d/1KRNPlFHRVQpOmCAnosO_CbHypjjUjigs/view?usp=drive_link', alt: 'Companion Form VFX — Showcase' }
+      {
+        type: 'youtube',
+        src: 'https://www.youtube.com/embed/Xg-b5SFwTtc',
+        alt: 'Companion Form VFX — Showcase'
+      },
+      {
+        type: 'youtube',
+        src: 'https://www.youtube.com/embed/YzNoD3PgBWE',
+        alt: 'Companion Form VFX — Showcase'
+      }
     ],
     stack: ['Unity', 'C#', 'Shader Graph', 'Particles', 'Technical VFX', 'Gameplay Systems'],
     role: 'Technical VFX Artist • Gameplay Programmer',
     highlights: [
-      'VFX that match each form’s theme and mechanics, using particles, shaders, and screen effects.',
-      'A reusable state machine system that let us create multiple forms sharing core logic but feeling visually and mechanically distinct.',
-      'Clear visual hierarchy so effects telegraph mechanics without drowning the screen.',
-      'Stylized looks that hold up under real-time constraints—no frame drops allowed.'
+      'Form-specific VFX using particles, shaders, and screen effects.',
+      'A state machine system allowing multiple forms to share core logic with distinct visuals.',
+      'Visual hierarchy that telegraphs mechanics without cluttering the screen.',
+      'Stylized visuals optimized for real-time performance.'
     ],
     challenge:
-      'How do you make effects punch hard without dumping a thousand particles? And build a multi-form AI companion where each form feels unique but shares a modular core, so the project doesn’t turn into visual spaghetti.',
+      'I needed high-impact effects without excessive particle counts and a way to manage multiple AI forms that shared a core but felt visually distinct.',
     solution:
-      'I used a composition-based approach: effects driven by gameplay parameters, layered with clear rules. Each companion form gets its own identity while the underlying tech stays lean.',
+      'I used composition, driving effects via gameplay parameters and clear layering rules. Each form maintains its identity on a lean technical base.',
+    links: { Breakdown: '/Companion-Forms.html' }
   }),
 
   createProject({
@@ -240,7 +249,7 @@ window.PROJECTS = [
     subtitle: 'A 2D Combat Metroidvania with a Custom Node-Based AI Toolkit',
     category: 'Gameplay AI & Tool Development',
     description:
-      'I built a visual, node-based AI system for enemy behaviors in a fast 2D combat metroidvania. The goal: let designers craft enemies quickly, debug them in real time, and keep performance tight—without sacrificing the snappy, readable combat the game demanded.',
+      'I built a visual, node-based AI system for enemy behaviors. This allows designers to create enemies quickly and debug them in real time without compromising combat performance.',
     media: [
       { type: 'youtube', src: 'https://www.youtube.com/embed/W0GpsP0deC0?si=bGQoK19uU9NwFirx', alt: 'Shiro — Enemy AI Tool' },
       { type: 'youtube', src: 'https://www.youtube.com/embed/vaWjq99quYM', alt: 'Shiro — AI Behaviors' },
@@ -254,16 +263,16 @@ window.PROJECTS = [
     ],
     role: 'Lead Gameplay Programmer & AI Tool Developer',
     highlights: [
-      'A node-based AI tool designed from scratch, with a UX tuned for our rapid combat iteration loop.',
-      'Behavior pipelines handling combat, movement, and encounter scripting—all configurable without touching code.',
-      'Live AI debugging: peek inside the enemy’s “mind” in real time, right in the editor.',
-      'Perception, memory, and decision-making broken into swappable modules.',
-      'Designers iterated enemy logic entirely inside the tool—zero C# required.'
+      'Custom node-based AI tool built for rapid combat iteration.',
+      'Behavior pipelines for combat, movement, and scripting, configurable without code.',
+      'Real-time AI debugging to inspect enemy decision making in the editor.',
+      'Modular perception, memory, and decision components.',
+      'Full behavior authoring for designers within the tool.'
     ],
     challenge:
-      'Hardcoded AI would’ve killed our speed. We needed enemies that felt smart and reactive, but designers had to be able to tweak and create new behaviors on the fly during production.',
+      'Hardcoded AI was too slow for our iteration speed. We needed a way for designers to tweak and create behaviors on the fly during production.',
     solution:
-      'I built a custom AI framework with a node-based editor. Behaviors are composed from reusable modules, visualized at runtime, and executed in a modular stack. New enemy types went from days to hours, and combat stayed tight.',
+      'I developed a custom AI framework with a node-based editor. Behaviors are composed from reusable modules and executed in a modular stack, reducing enemy creation time from days to hours.',
     links: {
       steam: 'https://store.steampowered.com/app/1589330/SHIRO/?cc=eu',
       AI2DTool: 'https://assetstore.unity.com/packages/tools/behavior-ai/2d-ai-tool-pro-196102'
@@ -276,7 +285,7 @@ window.PROJECTS = [
     subtitle: 'Modular Hazard Systems & Combat-Focused VFX',
     category: 'Gameplay Architecture & VFX',
     description:
-      'I built a hazard framework that let level designers drop obstacles into scenes without writing code. Alongside, I crafted the VFX—stylized, readable, and optimized—using particles, shaders, and screen distortion to sell the danger.',
+      'I created a hazard framework that lets level designers place obstacles without code. I also developed the stylized VFX using particles and shaders to clearly signal danger.',
     media: [
       { type: 'youtube', src: 'https://www.youtube.com/embed/TXeDlqbZBiA' },
       { type: 'youtube', src: 'https://www.youtube.com/embed/swXFGoIoi3A' },
@@ -295,17 +304,17 @@ window.PROJECTS = [
     ],
     role: 'Gameplay Programmer / Technical VFX Artist',
     highlights: [
-      'A single hazard architecture with shared behaviors and clean APIs—new hazards inherit common logic, no copy-paste.',
-      'Level designers could assemble hazards like building blocks, zero code required.',
-      'Spikes, saws, collapsing floors—several hazard types all running on the same unified system.',
-      'VFX that clearly communicated danger zones and attack timing through particles and shaders.',
-      'A camera-based distortion system for 2D screen effects that stayed smooth on target hardware.',
-      'Balanced visual clarity and feedback across hazards with very different timing profiles.'
+      'Unified hazard architecture with shared behaviors and clean APIs.',
+      'Block-based hazard assembly for level designers.',
+      'Multiple hazard types including spikes and saws running on one system.',
+      'VFX that communicate danger zones and attack timing.',
+      'Camera-based distortion system for 2D screen effects.',
+      'Consistent visual feedback across hazards with different timing profiles.'
     ],
     challenge:
-      'Hazards had to vary wildly—spikes that trigger on contact, saws that move on paths, collapsing platforms—but all of them had to share a single, designer-friendly framework.',
+      'Hazards varied from simple contact triggers to moving saws, but they all needed to work within a single designer-friendly framework.',
     solution:
-      'I built a base hazard class with hooks for timing, activation, and visual feedback. Designers mixed and matched behaviors through a config system, and the VFX layer was light enough to apply everywhere without hurting performance.',
+      'I built a base hazard class with hooks for timing and visual feedback. Designers use a config system to mix behaviors, while the VFX layer remains lightweight.',
     links: { steam: 'https://store.steampowered.com/app/1589330/SHIRO/' }
   }),
 
@@ -315,7 +324,7 @@ window.PROJECTS = [
     subtitle: 'A Stylized Combat VFX Sequence',
     category: 'Combat VFX & Cinematic Timing',
     description:
-      'An over-the-top slash attack inspired by DMC’s Judgement Cut End. I focused on building anticipation, then releasing it with precise timing—layered particles, procedural slash shapes, and smears that make the impact stick in your memory.',
+      'A slash attack inspired by DMC. I focused on anticipation and release using layered particles, procedural slash shapes, and smears to create a strong impact.',
     media: [
       { type: 'video', src: 'https://cdn.artstation.com/p/video_sources/002/407/511/slash-vfx.mp4' },
       { type: 'video', src: 'https://cdn.artstation.com/p/video_sources/002/407/683/combined-post-processing.mp4' },
@@ -324,17 +333,17 @@ window.PROJECTS = [
     stack: ['Unity', 'Particle Systems', 'Timeline', 'Shader Graph', 'Material Maker', 'Cascadeur', 'VFX Art'],
     role: 'Solo Technical VFX Artist / Programmer',
     highlights: [
-      'Owned the entire sequence, from rough sketch to final polished effect.',
-      'Procedural textures in Material Maker for slash trails and energy fragments—no static textures used.',
-      'Custom shaders for impact freezes, screen distortion, and motion smearing.',
-      'Character animation in Cascadeur, timed to sell the wind-up and the violent snap of the slash.',
-      'Used Timeline to orchestrate camera shakes, hit pauses, and VFX beats into a rhythmic sequence.',
-      'Shader and script combo for that anime-style impact frame: freeze, invert colors, shake.'
+      'Full sequence ownership from sketch to final polish.',
+      'Procedural textures for slash trails and energy fragments using Material Maker.',
+      'Custom shaders for impact freezes, distortion, and motion smearing.',
+      'Cascadeur animation timed for the wind-up and snap of the slash.',
+      'Timeline orchestration of camera shakes, hit pauses, and VFX beats.',
+      'Anime-style impact frames combining freeze, color inversion, and shake.'
     ],
     challenge:
-      'How to make a split-second slash feel earth-shattering but still readable? The effect had to hit hard without turning into visual noise.',
+      'I needed the slash to feel powerful and readable without creating visual noise during a split-second action.',
     solution:
-      'I used animation-driven timing to build tension, then layered particles and shaders over a series of freeze frames. Even though it’s over in a blink, the player feels every cut.',
+      'I used animation-driven timing to build tension and layered particles over freeze frames to ensure the impact was felt.',
     links: { artstation: 'https://www.artstation.com/artwork/0leGnE' }
   }),
 
@@ -344,24 +353,26 @@ window.PROJECTS = [
     subtitle: 'Anime-Style Motion Amplification for Unity',
     category: 'Tooling & Visual Polish',
     description:
-      'I made a tiny Unity tool that adds smears and impact frames with just a few clicks. No custom render pipelines needed—drop it in and instantly get that anime-style motion punch.',
+      'A Unity tool that adds smears and impact frames. It works without custom render pipelines to provide immediate anime-style motion punch.',
     media: [
-      { type: 'youtube', src: 'https://www.youtube.com/embed/MfKs7Bsjf58', alt: 'Smear & Impact Frames Tool — Showcase' }
+      { type: 'image', src: 'assets/img/portfolio/details/impact-frames-tool-1.png', alt: 'Smear & Impact Frames Tool — Demo' },
+      { type: 'image', src: 'assets/img/portfolio/details/impact-frames-tool-2.png', alt: 'Smear & Impact Frames Tool — Demo 2' },
+      { type: 'youtube', src: 'https://www.youtube.com/embed/MfKs7Bsjf58', alt: 'Smear & Impact Frames Tool — Showcase' },
     ],
     stack: ['Unity', 'C#', 'Shader Graph', 'Animation', 'Custom Editor Tooling', 'VFX'],
     role: 'Solo Tool Developer / Technical VFX',
     highlights: [
-      'A clean workflow to apply smears to movement, attacks—anything that moves fast.',
-      'Impact frames with that anime freeze + inversion, making big attacks feel devastating.',
-      'Dead-simple integration: add a component, tweak a few settings, and it just works.',
-      'Flexible controls that work for everything from a stylized brawler to a snappy platformer.',
-      'Tune smears and freeze timings in play mode and see the results instantly.'
+      'Workflow for applying smears to movement and attacks.',
+      'Anime-style freeze and inversion for impactful frames.',
+      'Simple component-based integration.',
+      'Controls compatible with both brawlers and platformers.',
+      'Real-time tuning of smears and freeze timings in play mode.'
     ],
     challenge:
-      'I wanted to create that flashy anime motion blur without forcing devs to learn shader programming or build custom VFX systems.',
+      'I wanted to provide a way to create flashy anime motion without requiring developers to write shaders or build complex VFX systems.',
     solution:
-      'The tool automates smear generation and impact frame timing, all exposed through inspector controls. It fits into any project and dramatically cuts down the time to make actions feel weighty.',
-    links: { 'Asset Store Soon': 'https://assetstore.unity.com/'}
+      'I automated smear generation and impact frame timing through inspector controls, making it easy to add weight to actions in any project.',
+    links: { 'Asset Store Soon': 'https://assetstore.unity.com/' }
   }),
 
   createProject({
@@ -370,25 +381,28 @@ window.PROJECTS = [
     subtitle: 'Technical VFX · Shiro',
     category: 'Technical VFX',
     description:
-      'A sci-fi inspired respawn and despawn effect created for Shiro. The effect dissolves the player sprite into particles using a hybrid workflow between Unity Particle System and VFX Graph.',
+      'A sci-fi respawn and despawn effect for Shiro. The effect dissolves the player sprite into particles using a mix of Unity Particle System and VFX Graph.',
 
-    role: 'Designed and implemented the full VFX pipeline, including sprite sampling, particle spawning behavior, dissolve logic, timing, and gameplay integration.',
+    role: 'Designed and implemented the VFX pipeline, including sprite sampling, particle behavior, dissolve logic, and gameplay integration.',
     stack: ['Unity', 'VFX Graph', 'Shader Graph', 'Particle System', 'URP', 'C#'],
     highlights: [
-      'Sprite-to-particle dissolve using the current rendered character frame',
-      'Hybrid workflow combining Particle System and GPU VFX Graph',
-      'Gameplay-integrated death and respawn transition effect',
+      'Sprite-to-particle dissolve using the current character frame',
+      'Hybrid Particle System and GPU VFX Graph workflow',
+      'Integrated death and respawn transition effects',
       'Custom dissolve timing and particle emission control',
-      'Sci-fi visual direction matching Shiro art style',
-      'Built for real-time gameplay responsiveness'
+      'Sci-fi visuals matching the Shiro art style',
+      'Responsive real-time gameplay integration'
     ],
     challenge:
-      'Create a death and respawn effect that felt impactful and readable while keeping the game visual identity.',
+      'I needed a death and respawn effect that felt impactful and readable while staying true to the game\'s visual identity.',
     solution:
-      'Used VFX Graph to sample the active Shiro sprite and dissolve it into GPU particles while combining layered particle effects for energy bursts, distortion, and respawn feedback. The final effect kept gameplay readability while giving the mechanic a stronger visual identity.',
+      'I used VFX Graph to sample the sprite and dissolve it into GPU particles, adding layered energy bursts and distortion for better feedback.',
     links: {},
     media: [
-      { type: 'gdrive', src: 'https://drive.google.com/file/d/1ANJNui-9rOfduM7OmItdKVy06N2nUooJ/view?usp=drive_link' }
+      {
+        type: 'youtube',
+        src: 'https://www.youtube.com/embed/zGV2u-SOAoQ'
+      }
     ],
     section: 'showcase'
   }),
@@ -399,17 +413,20 @@ window.PROJECTS = [
     subtitle: 'Stylized 2D Water Shader for SHIRO',
     category: 'VFX & Technical Art',
     description:
-      'A stylized interactive water solution created for SHIRO that matched the game’s visual language while remaining lightweight for gameplay usage. Designed to react to player movement and environmental interaction to make levels feel more alive.',
+      'A stylized interactive water solution for SHIRO. It reacts to player movement and environmental interaction to make levels feel more alive while remaining lightweight.',
     media: [
-      { type: 'gdrive', src: 'https://drive.google.com/file/d/1tI2idxfFeUlqExMpPNWKFsvHa_jcvf6h/view?usp=drive_link' }
+      {
+        type: 'youtube',
+        src: 'https://www.youtube.com/embed/soqNu4WyOj8'
+      }
     ],
     stack: ['Unity', 'Shader Graph', 'URP', 'Particles', 'Technical Art', '2D Rendering'],
     role: 'Technical VFX Artist / Gameplay Programmer',
     highlights: [
-      'Built a stylized water shader designed to blend naturally with SHIRO’s hand drawn visual style',
-      'Added interactive surface motion driven by player and gameplay interaction',
-      'Combined shader animation and secondary particle effects to improve readability and motion',
-      'Designed the effect to remain lightweight and scalable for multiple level scenarios'
+      'Water shader that blends with SHIRO’s hand drawn style',
+      'Surface motion driven by player and gameplay interaction',
+      'Combined shader animation and secondary particles for better motion',
+      'Scalable design for various level scenarios'
     ],
     links: {},
     section: 'showcase'
@@ -424,7 +441,7 @@ window.PROJECTS = [
     category: 'Technical VFX',
 
     description:
-      'A high-speed dash effect created using a hybrid workflow combining Unity Particle Systems and VFX Graph. The effect focuses on readability, impact framing, directional motion, and layered energy trails while remaining lightweight enough for gameplay-heavy combat scenarios.',
+      'A high-speed dash effect using a hybrid of Particle Systems and VFX Graph. It focuses on readability and directional motion while staying lightweight for combat.',
 
     role:
       'Technical VFX Artist · Gameplay Programmer',
@@ -439,26 +456,26 @@ window.PROJECTS = [
     ],
 
     highlights: [
-      'Combined VFX Graph volumetric particles with traditional Particle Systems for tighter gameplay timing',
-      'Built directional energy trails synchronized with dash velocity and animation timing',
-      'Layered additive distortion, glow streaks, and impact particles for stronger readability',
-      'Used shader-driven UV distortion and dissolve masks to reinforce movement speed',
-      'Optimized particle counts and spawn timing for combat-heavy gameplay scenarios',
-      'Designed to preserve player silhouette readability during fast movement'
+      'Combined volumetric particles with traditional systems for tighter timing',
+      'Directional energy trails synchronized with velocity and animation',
+      'Layered additive distortion and glow for better readability',
+      'Shader-driven UV distortion and dissolve masks to emphasize speed',
+      'Optimized particle counts for combat-heavy scenes',
+      'Preserves player silhouette during fast movement'
     ],
 
     challenge:
-      'The main challenge was balancing visual intensity with gameplay readability. The dash needed to feel fast and aggressive without obscuring enemy attacks, player positioning, or combat clarity without relying on simple after images.',
+      'I had to balance visual intensity with readability. The dash needed to feel aggressive without obscuring enemies or player positioning.',
 
     solution:
-      'I used an approach that mixed VFX graph for the shape particles based on the character pixel and traditional particle systems for the directional trails and impact effects. Custom shaders added distortion and glow without overwhelming the player’s view during combat.',
+      'I used VFX Graph for shape particles based on character pixels and traditional systems for trails. Custom shaders added distortion and glow without blocking the view.',
 
     media: [
       {
-        type: 'gdrive',
-        src: 'https://drive.google.com/file/d/1dYoyHyfYuHJMC7htKyxUiodWZ9OCdCGG/view?usp=drive_link'
-      },
-    ]
+        type: 'youtube',
+        src: 'https://www.youtube.com/embed/Y3AOkVdCMlg'
+      }
+    ],
   }),
 
   // ---------------------------------------------------------------------------
@@ -471,24 +488,24 @@ window.PROJECTS = [
     subtitle: 'Quick Mobile Arcade Prototype',
     category: 'Mobile Prototyping & Gameplay',
     description:
-      'I challenged myself to build a full Android game loop from scratch in minimal time. The result is a fast arcade experience with escalating enemies, weapon pickups, and decision-making that fits a mobile session.',
+      'A fast arcade experience for Android with escalating enemies and weapon pickups, built to test a tight mobile game loop.',
     media: [
       { type: 'youtube', src: 'https://www.youtube.com/embed/JRkccHQgHBY' },
-      { type: 'image', src: 'https://maykerstudio.github.io/Portfolio/assets/img/portfolio/details/project-b-2.png' }
+      { type: 'image', src: 'assets/img/portfolio/details/project-b-2.png' }
     ],
     stack: ['Unity', 'C#', 'Android', 'Gameplay Systems', 'Rapid Prototyping', 'UI', 'Enemy Behaviors'],
     role: 'Solo Gameplay Programmer',
     highlights: [
-      'Had a playable build running on my phone in a short cycle—concept to validation.',
-      'Survival loop where you defend a core objective against waves that get progressively nastier.',
-      'Weapon pickups that temporarily change your combat style, forcing quick tactical decisions.',
-      'Enemies that behave differently: some rush the core, others hunt you.',
-      'Architecture left room for more enemy types, bosses, and level variations.'
+      'Rapid cycle from concept to playable Android build.',
+      'Survival loop focused on defending a core objective.',
+      'Tactical weapon pickups that change combat style.',
+      'Varied enemy behaviors, including rushers and hunters.',
+      'Scalable architecture for new enemy types and bosses.'
     ],
     challenge:
-      'I wanted to prove that a satisfying mobile arcade experience could be built fast, without cutting corners on gameplay depth.',
+      'I wanted to build a satisfying mobile arcade experience quickly without sacrificing gameplay depth.',
     solution:
-      'I zeroed in on a vertical slice with a tight core loop, reusable systems, and just enough enemy variety to keep you thinking. The simplicity kept the codebase lean and the fun factor high.',
+      'I focused on a vertical slice with a tight core loop and reusable systems. This kept the codebase lean and the gameplay focused.',
     links: { demo: 'https://drive.google.com/file/d/103-AoxCmm7IZyPH23FmAKAv7R07FwIx3/view' },
     legacy: true,
     section: 'archive',
@@ -501,7 +518,7 @@ window.PROJECTS = [
     subtitle: 'Early Combat Systems & Open World Experimentation',
     category: 'Archive · Gameplay Programming',
     description:
-      'My first real Unity project, built while I was making the jump from general programming into games. I wanted to get a handle on responsive combat, streaming large worlds, and managing huge animation sets inside a Metroidvania framework.',
+      'An early Unity project used to explore responsive combat, world streaming, and large animation sets within a Metroidvania framework.',
     media: [
       { type: 'youtube', src: 'https://www.youtube.com/embed/m7DtAvukxzQ' },
       { type: 'youtube', src: 'https://www.youtube.com/embed/f9hYA0epIOI' },
@@ -510,19 +527,273 @@ window.PROJECTS = [
     stack: ['Unity', 'C#', 'Gameplay Programming', 'Animation Systems', 'Level Streaming', 'Blender', 'Photoshop'],
     role: 'Solo Developer',
     highlights: [
-      'A scalable animation system for large sprite sheets—one of my earliest attempts at keeping animation pipelines manageable.',
-      'Chainable attack combos with smooth transition logic, built to stay responsive at high speed.',
-      'A dynamic level loader that streamed areas in and out, giving the illusion of an open world without load screens.',
-      'Hand-animated characters in Blender, exported as sprite sheets and integrated directly into Unity.',
-      'Created environment art and composed scenes in Photoshop to establish the game’s atmosphere.'
+      'Scalable animation system for large sprite sheets.',
+      'Responsive chainable attack combos with smooth transitions.',
+      'Dynamic level loader that streams areas to simulate an open world.',
+      'Hand-animated characters created in Blender and exported to Unity.',
+      'Environmental art and scene composition in Photoshop.'
     ],
     challenge:
-      'I was learning Unity on the fly, adapting my programming background to game dev. The real challenge was keeping systems flexible while figuring out how everything worked together.',
+      'I was learning Unity while applying my programming background. The main goal was keeping systems flexible while figuring out the engine.',
     solution:
-      'I kept the code modular from day one—building a combat and animation foundation that wouldn’t break as I added more moves and areas. Instead of polishing content, I concentrated on architecture that could scale.',
+      'I prioritized modular code for combat and animation from the start. This ensured the foundation wouldn\'t break as I added more moves and areas.',
     links: {},
     legacy: true,
     section: 'archive',
     legacyYear: '2020'
+  }),
+  createProject({
+    id: 'ai-editor',
+
+    category: 'Unity Tools',
+
+    title: 'Node-Based AI Editor',
+    section: 'tools',
+
+    subtitle:
+      'Visual behavior authoring and runtime debugging framework.',
+
+    description:
+      'A custom node-based behavior editor for scaling enemy AI, reusable logic flows, and complex states in 2D games.',
+
+    role:
+      'Gameplay Programmer · Tools Programmer',
+
+    stack: [
+      'Unity',
+      'C#',
+      'Editor Scripting',
+      'Open Source Node Framework',
+      'AI Architecture'
+    ],
+
+    highlights: [
+      'Reusable node architecture',
+      'Transition debugging',
+      'Complex base states for movement and combat',
+      'Designer-friendly editing',
+      'Custom editor tooling'
+    ],
+
+    challenge:
+      'Hardcoded state logic made enemy behaviors difficult to scale and debug.',
+
+    solution:
+      'I built a visual node-based workflow with modular behaviors, reusable transitions, and runtime inspection tools.',
+
+    media: [
+      {
+        type: 'image',
+        src: 'assets/img/portfolio/details/2D-ai-tool.jpg'
+      },
+      {
+        type: 'image',
+        src: 'assets/img/portfolio/details/2D-ai-tool-1.png'
+      },
+      {
+        type: 'image',
+        src: 'assets/img/portfolio/details/2D-ai-tool-2.png'
+      },
+      {
+        type: 'image',
+        src: 'assets/img/portfolio/details/2D-ai-tool-3.png'
+      },
+      {
+        type: 'image',
+        src: 'assets/img/portfolio/details/2D-ai-tool-4.png'
+      },
+      {
+        type: 'image',
+        src: 'assets/img/portfolio/details/2D-ai-tool-5.png'
+      },
+    ],
+
+    links: {
+      AssetStore: 'https://assetstore.unity.com/packages/tools/behavior-ai/2d-ai-tool-pro-196102',
+      Framework: 'https://github.com/Siccity/xNode'
+    }
+  }),
+  createProject({
+    id: 'rattrap-hitbox-synchronizer',
+
+    section: 'tools',
+
+    category: 'Unity Tools',
+
+    title: 'Rat Trap Character Synchronizer',
+
+    subtitle:
+      'Prefab synchronization tool for shared combat and gameplay components.',
+
+    description:
+      'A custom editor tool for Rat Trap that synchronizes hitboxes and shared components across 16 playable character prefabs. It allows combat tuning from a single source prefab and propagates changes safely.',
+
+    role:
+      'Gameplay Programmer · Tools Programmer',
+
+    stack: [
+      'Unity',
+      'C#',
+      'Editor Scripting',
+      'SerializedObject',
+      'PrefabUtility',
+      'Custom Inspectors',
+      'Production Pipelines'
+    ],
+
+    highlights: [
+      'Multi-prefab hitbox synchronization',
+      'Shared gameplay component propagation',
+      'Runtime-safe serialized property copying',
+      'Custom split-view editor interface',
+      'Batch prefab editing workflows',
+      'Undo support and propagation logs',
+      'Searchable component inspector',
+      'Production iteration optimization'
+    ],
+
+    challenge:
+      'Editing values manually across 16 characters sharing combat logic was slow and prone to errors during balancing passes.',
+
+    solution:
+      'I built a synchronization tool using SerializedObject pipelines and PrefabUtility. This propagates data from a master prefab while preserving object references and providing undo support.',
+
+    media: [
+      {
+        type: 'image',
+        src: 'assets/img/portfolio/Rat-Trap-Character-Synchronizer.png'
+      },
+
+      {
+        type: 'image',
+        src: 'assets/img/portfolio/Rat-Trap-Character-Synchronizer-2.png'
+      }
+    ],
+
+    links: {}
+  }),
+  createProject({
+    id: 'rattrap-room-loader',
+
+    section: 'tools',
+
+    title: 'Room Loader & Scene Streaming Tools',
+
+    subtitle:
+      'Unity editor pipeline for room-based level streaming, minimap generation, and rapid scene editing workflows.',
+
+    category: 'Pipeline / Tools Engineering',
+
+    description:
+      'A room-based workflow for Rat Trap that automates trigger generation, additive scene setup, and async room loading for large 2D maps. The tools also generate minimap snapshots and allow designers to jump to room scenes via the minimap.',
+
+    role:
+      'Designed and implemented the editor tooling pipeline, trigger generation, scene loading workflow, minimap renderer, and navigation utilities.',
+
+    stack: [
+      'Unity',
+      'C#',
+      'Custom Editor Tools',
+      'SceneManagement',
+      'Async Loading',
+      'Additive Scenes',
+      'Level Streaming',
+      'Pipeline Engineering'
+    ],
+
+    highlights: [
+      'Automatic room trigger generation from collider geometry',
+      'Async additive scene loading pipeline',
+      'Editor-generated minimap screenshots from loaded scenes',
+      'Clickable minimap navigation for room editing',
+      'Grid-based room blocker generation',
+      'Custom Unity editor windows and scene utilities'
+    ],
+
+    challenge:
+      'Managing dozens of interconnected room scenes manually was slow. Designers needed to generate streaming triggers and navigate large maps without opening scenes one by one.',
+
+    solution:
+      'I created a room-streaming pipeline that automatically generates trigger zones, validates scene connections, and provides minimap-based navigation to speed up the editing workflow.',
+
+    media: [
+      {
+        type: 'youtube',
+        src: 'https://www.youtube.com/embed/MB67DCHRm30',
+        alt: 'Room Loader editor overview'
+      },
+      {
+        type: 'image',
+        src: 'assets/img/portfolio/room-loader-screen1.png',
+        alt: 'Room Loader'
+      },
+      {
+        type: 'image',
+        src: 'assets/img/portfolio/room-loader-screen2.png',
+        alt: 'Room Loader'
+      }
+    ],
+  }),
+  createProject({
+    id: 'shiro-animation-search',
+
+    section: 'tools',
+
+    title: 'Animation Search & Preview Tool',
+
+    subtitle:
+      'Custom Unity editor for instantly finding, previewing, and navigating animation libraries across large projects.',
+
+    category: 'Pipeline / Tools Engineering',
+
+    description:
+      'A searchable animation workflow for Shiro that allows developers to locate Animator Controllers, filter clips, preview animations, and jump to associated prefabs.',
+
+    role:
+      'Designed and implemented the editor tool, including controller indexing, search, prefab navigation, and editor playback controls.',
+
+    stack: [
+      'Unity',
+      'C#',
+      'Custom Editor Tools',
+      'Animator Controllers',
+      'Animation Window',
+      'AssetDatabase',
+      'Prefab Mode',
+      'Pipeline Engineering'
+    ],
+
+    highlights: [
+      'Project-wide Animator Controller scanning',
+      'Direct Animation Window integration',
+      'Built-in animation playback controls',
+      'Controller sorting by animation count',
+      'Prefab Mode workflow support',
+      'Rapid animation discovery pipeline'
+    ],
+
+    challenge:
+      'Shiro has many Animator Controllers spread across characters and enemies. Unity lacks a global search for animations, making it slow to find and preview specific clips.',
+
+    solution:
+      'I built an animation browser that indexes all controllers, provides instant filtering, and opens animations directly in the Animation Window, significantly reducing discovery time.',
+
+    media: [
+      {
+        type: 'image',
+        src: 'assets/img/portfolio/animation-selector-editor-1.png',
+        alt: 'Animation Search Tool overview'
+      },
+      {
+        type: 'image',
+        src: 'assets/img/portfolio/animation-selector-editor-2.png',
+        alt: 'Animator Controller search and filtering'
+      },
+    ],
+
+    links: {
+      github: 'https://github.com/MaykerStudio/UnityCustomAnimationSelector',
+      demo: ''
+    }
   })
 ];

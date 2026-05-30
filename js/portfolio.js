@@ -22,40 +22,14 @@
   }
   // #endregion
 
-  // #region Google Drive helper
-  function getGoogleDriveId(src) {
-    const patterns = [
-      /\/file\/d\/([^/]+)/,
-      /[?&]id=([^&]+)/,
-      /\/d\/([^/]+)/
-    ];
-    for (const re of patterns) {
-      const m = src.match(re);
-      if (m) return m[1];
-    }
-    return null;
-  }
-
-  function getGoogleDriveThumbnail(src, size = 'w1280') {
-    const id = getGoogleDriveId(src);
-    if (!id) return '';
-    return `https://drive.google.com/thumbnail?id=${id}&sz=${size}`;
-  }
-
-  function getGoogleDriveEmbedUrl(src) {
-    const id = getGoogleDriveId(src);
-    if (!id) return '';
-    return `https://drive.google.com/file/d/${id}/preview`;
-  }
-  // #endregion
-
   // #region Project Card Rendering
   function renderProjectCards() {
 
     const grids = {
       featured: document.getElementById('projects-grid'),
       showcase: document.getElementById('showcase-grid'),
-      archive: document.getElementById('archive-grid')
+      archive: document.getElementById('archive-grid'),
+      tools: document.getElementById('tools-grid')
     };
 
     if (!window.PROJECTS) return;
@@ -85,10 +59,6 @@
 
           if (m.type === 'youtube') {
             return m.thumb || getYoutubeThumbnail(m.src);
-          }
-
-          if (m.type === 'gdrive') {
-            return m.thumb || getGoogleDriveThumbnail(m.src, 'w1280');
           }
 
           return null;
@@ -422,9 +392,105 @@
 
       document.body.appendChild(this.overlay);
 
+      // #region Fullscreen viewer
+      const style = document.createElement('style');
+      style.textContent = `
+        .modal-fs-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.96);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 99999;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.25s ease;
+        }
+        .modal-fs-overlay.is-open {
+          opacity: 1;
+          pointer-events: all;
+        }
+        .modal-fs-img {
+          max-width: 95vw;
+          max-height: 90vh;
+          object-fit: contain;
+          border-radius: 4px;
+          user-select: none;
+        }
+        .modal-fs-close {
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          background: rgba(255, 255, 255, 0.1);
+          border: none;
+          color: #fff;
+          font-size: 18px;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.2s;
+        }
+        .modal-fs-close:hover {
+          background: rgba(255, 255, 255, 0.22);
+        }
+        .carousel-item--image {
+          position: relative;
+        }
+        .carousel-fs-btn {
+          position: absolute;
+          bottom: 12px;
+          right: 12px;
+          background: rgba(0, 0, 0, 0.55);
+          border: none;
+          color: #fff;
+          width: 36px;
+          height: 36px;
+          border-radius: 6px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          transition: opacity 0.2s, background 0.2s;
+          z-index: 10;
+        }
+        .carousel-item--image:hover .carousel-fs-btn {
+          opacity: 1;
+        }
+        .carousel-fs-btn:hover {
+          background: rgba(0, 0, 0, 0.82);
+        }
+      `;
+      document.head.appendChild(style);
+
+      this._fsOverlay = document.createElement('div');
+      this._fsOverlay.className = 'modal-fs-overlay';
+      this._fsOverlay.setAttribute('aria-hidden', 'true');
+      this._fsOverlay.innerHTML = `
+        <button class="modal-fs-close" aria-label="Close fullscreen">&#10005;</button>
+        <img class="modal-fs-img" src="" alt="">
+      `;
+      document.body.appendChild(this._fsOverlay);
+
+      this._fsOverlay.querySelector('.modal-fs-close')
+        .addEventListener('click', () => this._closeFullscreen());
+      this._fsOverlay
+        .addEventListener('click', e => { if (e.target === this._fsOverlay) this._closeFullscreen(); });
+      // #endregion
+
       this._container = this.overlay.querySelector('.modal-container');
       this._track = this.overlay.querySelector('.carousel-track');
       this._indicators = this.overlay.querySelector('.carousel-indicators');
+
+      this._track.addEventListener('click', e => {
+        const btn = e.target.closest('.carousel-fs-btn');
+        if (btn) this._openFullscreen(btn.dataset.fsSrc);
+      });
 
       this.overlay.querySelector('.js-prev').addEventListener('click', () => this._go(-1));
       this.overlay.querySelector('.js-next').addEventListener('click', () => this._go(1));
@@ -434,6 +500,10 @@
 
     _bindKeyboard() {
       document.addEventListener('keydown', e => {
+        if (this._fsOverlay?.classList.contains('is-open')) {
+          if (e.key === 'Escape') this._closeFullscreen();
+          return;
+        }
         if (!this.overlay.classList.contains('is-open')) return;
         if (e.key === 'Escape') this.close();
         if (e.key === 'ArrowLeft') this._go(-1);
@@ -458,6 +528,17 @@
       document.body.style.overflow = '';
 
       startAllPreviewCarousels();
+    }
+
+    _openFullscreen(src) {
+      this._fsOverlay.querySelector('.modal-fs-img').src = src;
+      this._fsOverlay.setAttribute('aria-hidden', 'false');
+      this._fsOverlay.classList.add('is-open');
+    }
+
+    _closeFullscreen() {
+      this._fsOverlay.classList.remove('is-open');
+      this._fsOverlay.setAttribute('aria-hidden', 'true');
     }
 
     _populate(p) {
@@ -539,7 +620,6 @@
     _buildCarousel(media) {
       this._mediaCount = media.length;
       this._youtubeLoaded = new Array(media.length).fill(false);
-      this._gdriveLoaded = new Array(media.length).fill(false);
 
       this._track.innerHTML = media.map((m, i) => {
         if (m.type === 'video') {
@@ -548,10 +628,18 @@
         if (m.type === 'youtube') {
           return `<div class="carousel-item youtube-placeholder" data-youtube-src="${m.src}" data-index="${i}"></div>`;
         }
-        if (m.type === 'gdrive') {
-          return `<div class="carousel-item gdrive-placeholder" data-gdrive-src="${m.src}" data-index="${i}"></div>`;
-        }
-        return `<div class="carousel-item"><img src="${m.src}" alt="${m.alt || ''}" loading="lazy" style="width:100%; height:100%; object-fit: cover;"></div>`;
+        return `
+          <div class="carousel-item carousel-item--image">
+            <img src="${m.src}" alt="${m.alt || ''}" loading="lazy" style="width:100%; height:100%; object-fit: cover;">
+            <button class="carousel-fs-btn" data-fs-src="${m.src}" aria-label="View fullscreen">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <polyline points="9 21 3 21 3 15"></polyline>
+                <line x1="21" y1="3" x2="14" y2="10"></line>
+                <line x1="3" y1="21" x2="10" y2="14"></line>
+              </svg>
+            </button>
+          </div>`;
       }).join('');
 
       this._indicators.innerHTML = media.map((_, i) => `
@@ -565,7 +653,6 @@
       this._carouselIndex = 0;
       this._render();
       this._loadYoutubeSlide(0);
-      this._loadGdriveSlide(0);
     }
 
     _render() {
@@ -574,7 +661,6 @@
         dot.classList.toggle('is-active', i === this._carouselIndex);
       });
       this._loadYoutubeSlide(this._carouselIndex);
-      this._loadGdriveSlide(this._carouselIndex);
     }
 
     _loadYoutubeSlide(index) {
@@ -584,9 +670,14 @@
 
       const src = placeholder.dataset.youtubeSrc;
       const iframe = document.createElement('iframe');
-      iframe.src = src;
+      
+      iframe.src =
+        src +
+        (src.includes('?') ? '&' : '?') +
+        'rel=0&modestbranding=1&playsinline=1';
+      
       iframe.setAttribute('frameborder', '0');
-      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; ');
       iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
       iframe.setAttribute('allowfullscreen', '');
       iframe.setAttribute('title', 'YouTube video player');
@@ -598,31 +689,6 @@
       placeholder.appendChild(iframe);
       placeholder.classList.remove('youtube-placeholder');
       this._youtubeLoaded[index] = true;
-    }
-
-    _loadGdriveSlide(index) {
-      if (this._gdriveLoaded[index]) return;
-      const placeholder = this._track.querySelector(`.gdrive-placeholder[data-index="${index}"]`);
-      if (!placeholder) return;
-
-      const src = placeholder.dataset.gdriveSrc;
-      const embedUrl = getGoogleDriveEmbedUrl(src);
-      if (!embedUrl) return;
-
-      const iframe = document.createElement('iframe');
-      iframe.src = embedUrl;
-      iframe.setAttribute('frameborder', '0');
-      iframe.setAttribute('allow', 'autoplay');
-      iframe.setAttribute('allowfullscreen', '');
-      iframe.setAttribute('title', 'Google Drive media');
-      iframe.style.width = '100%';
-      iframe.style.height = '100%';
-      iframe.style.border = 'none';
-
-      placeholder.innerHTML = '';
-      placeholder.appendChild(iframe);
-      placeholder.classList.remove('gdrive-placeholder');
-      this._gdriveLoaded[index] = true;
     }
 
     _go(dir) {
