@@ -229,7 +229,7 @@ window.PROJECTS = [
       }
     ],
     stack: ['Unity', 'C#', 'Shader Graph', 'Particles', 'Technical VFX', 'Gameplay Systems'],
-    role: 'Technical VFX Artist • Gameplay Programmer',
+    role: 'Technical VFX Artist · Gameplay Programmer',
     highlights: [
       'Form-specific VFX using particles, shaders, and screen effects.',
       'A state machine system allowing multiple forms to share core logic with distinct visuals.',
@@ -287,17 +287,17 @@ window.PROJECTS = [
     description:
       'I created a hazard framework that lets level designers place obstacles without code. I also developed the stylized VFX using particles and shaders to clearly signal danger.',
     media: [
-      { type: 'youtube', src: 'https://www.youtube.com/embed/TXeDlqbZBiA' },
-      { type: 'youtube', src: 'https://www.youtube.com/embed/swXFGoIoi3A' },
-      { type: 'youtube', src: 'https://www.youtube.com/embed/rNwW72rvH8M' },
-      { type: 'youtube', src: 'https://www.youtube.com/embed/05aFlNGHqfA' },
-      { type: 'youtube', src: 'https://www.youtube.com/embed/A-L_EXQBc-4' },
-      { type: 'youtube', src: 'https://www.youtube.com/embed/NIJuzEdpNEU' },
-      { type: 'youtube', src: 'https://www.youtube.com/embed/e9ubi3NAzQk' },
-      { type: 'youtube', src: 'https://www.youtube.com/embed/IJL8a6G_FNA' },
-      { type: 'youtube', src: 'https://www.youtube.com/embed/PH7DyfbWbEY' },
-      { type: 'youtube', src: 'https://www.youtube.com/embed/KHzJVNutOKg' },
-      { type: 'youtube', src: 'https://www.youtube.com/embed/1NjaGJjJWzM' }
+      { type: 'youtube', src: 'https://www.youtube.com/embed/TXeDlqbZBiA', alt: 'SHIRO — Environmental Hazards' },
+      { type: 'youtube', src: 'https://www.youtube.com/embed/swXFGoIoi3A', alt: 'SHIRO — Environmental Hazards' },
+      { type: 'youtube', src: 'https://www.youtube.com/embed/rNwW72rvH8M', alt: 'SHIRO — Environmental Hazards' },
+      { type: 'youtube', src: 'https://www.youtube.com/embed/05aFlNGHqfA', alt: 'SHIRO — Environmental Hazards' },
+      { type: 'youtube', src: 'https://www.youtube.com/embed/A-L_EXQBc-4', alt: 'SHIRO — Environmental Hazards' },
+      { type: 'youtube', src: 'https://www.youtube.com/embed/NIJuzEdpNEU', alt: 'SHIRO — Environmental Hazards' },
+      { type: 'youtube', src: 'https://www.youtube.com/embed/e9ubi3NAzQk', alt: 'SHIRO — Environmental Hazards' },
+      { type: 'youtube', src: 'https://www.youtube.com/embed/IJL8a6G_FNA', alt: 'SHIRO — Environmental Hazards' },
+      { type: 'youtube', src: 'https://www.youtube.com/embed/PH7DyfbWbEY', alt: 'SHIRO — Environmental Hazards' },
+      { type: 'youtube', src: 'https://www.youtube.com/embed/KHzJVNutOKg', alt: 'SHIRO — Environmental Hazards' },
+      { type: 'youtube', src: 'https://www.youtube.com/embed/1NjaGJjJWzM', alt: 'SHIRO — Environmental Hazards' }
     ],
     stack: [
       'Unity', 'C#', 'Gameplay Architecture', 'Particle Systems', 'Shader Graph', 'Editor Tools', 'Screen Distortion', 'Reusable Systems'
@@ -376,6 +376,57 @@ window.PROJECTS = [
   }),
 
   createProject({
+    id: 'rat-trap-warp-bullet',
+    section: 'showcase',
+
+    title: 'Rat Trap — Warp Bullet',
+    subtitle: 'Teleport Shot for Fast Traversal',
+    category: 'Technical VFX & Gameplay Systems',
+
+    description:
+      'A special shot in Rat Trap that lets the player teleport to where the projectile lands. Firing pauses the action while the camera follows the shot, then the player reappears with a clear burst effect.',
+
+    role:
+      'Technical VFX Artist · Gameplay Programmer',
+
+    stack: [
+      'Unity',
+      'C#',
+      'Shader Graph',
+      'Particle System',
+      'URP',
+      'Gameplay Systems'
+    ],
+
+    highlights: [
+      'Interactive aiming effect that shows the valid range and warns when the shot nears its limit.',
+      'Room camera that follows the projectile in flight to keep the shot easy to track.',
+      'Projectile interacts with other systems such as reflectors for varied play.',
+      'Distortion and post effects that signal the altered state after teleporting.'
+    ],
+
+    challenge:
+      'I needed a traversal ability that could teleport the player anywhere in the room, while staying out of terrain, avoiding soft-locks, and carrying a distinct visual identity.',
+
+    solution:
+      'I built a room-wide teleport that keeps landings clear of terrain and safe from soft-locks, paired with a distinct effect that tracks the shot and marks the arrival.',
+
+    media: [
+      {
+        type: 'youtube',
+        src: 'https://www.youtube.com/embed/nZ_MZ7POUlY',
+        alt: 'Rat Trap — Warp Bullet'
+      },
+      {
+        type: 'youtube',
+        src: 'https://www.youtube.com/embed/Fb0fO-Itt1I',
+        alt: 'Rat Trap — Warp Bullet gameplay'
+      }
+    ],
+    links: {},
+  }),
+
+  createProject({
     id: 'shiro-bad-touch-vfx',
     title: 'Bad Touch Respawn VFX',
     subtitle: 'Technical VFX · Shiro',
@@ -383,15 +434,15 @@ window.PROJECTS = [
     description:
       'A sci-fi respawn and despawn effect for Shiro. The effect dissolves the player sprite into particles using a mix of Unity Particle System and VFX Graph.',
 
-    role: 'Designed and implemented the VFX pipeline, including sprite sampling, particle behavior, dissolve logic, and gameplay integration.',
+    role: 'Technical VFX Artist · Gameplay Programmer',
     stack: ['Unity', 'VFX Graph', 'Shader Graph', 'Particle System', 'URP', 'C#'],
     highlights: [
-      'Sprite-to-particle dissolve using the current character frame',
-      'Hybrid Particle System and GPU VFX Graph workflow',
-      'Integrated death and respawn transition effects',
-      'Custom dissolve timing and particle emission control',
-      'Sci-fi visuals matching the Shiro art style',
-      'Responsive real-time gameplay integration'
+      'Sprite-to-particle dissolve using the current character frame.',
+      'Hybrid Particle System and GPU VFX Graph workflow.',
+      'Death and respawn transitions timed to gameplay.',
+      'Dissolve timing and emission control tuned per beat.',
+      'Sci-fi look matched to the Shiro art style.',
+      'Live feedback wired into the respawn flow.'
     ],
     challenge:
       'I needed a death and respawn effect that felt impactful and readable while staying true to the game\'s visual identity.',
@@ -401,10 +452,56 @@ window.PROJECTS = [
     media: [
       {
         type: 'youtube',
-        src: 'https://www.youtube.com/embed/zGV2u-SOAoQ'
+        src: 'https://www.youtube.com/embed/zGV2u-SOAoQ',
+        alt: 'Shiro — Bad Touch Respawn VFX'
       }
     ],
     section: 'showcase'
+  }),
+
+  createProject({
+    id: 'rat-trap-portal-vfx',
+    section: 'showcase',
+
+    title: 'Rat Trap — Challenge Room Portal',
+    subtitle: 'Reactive Portal VFX for Challenge Rooms',
+    category: 'Technical VFX & Gameplay Systems',
+
+    description:
+      'A procedural HLSL portal shader for Rat Trap challenge rooms. It builds the entryway from math alone in a URP unlit transparent pass, with parameters for Calm, Excited, and Closed states.',
+
+    role:
+      'Technical VFX Artist · Gameplay Programmer',
+
+    stack: [
+      'Unity',
+      'C#',
+      'Particle System',
+      'URP',
+      'Custom Shaders',
+      'Gameplay Systems'
+    ],
+
+    highlights: [
+      'Procedural HLSL with no textures; oval polar UV with wobble and swirl drives each layer.',
+      'Extensible state system with Calm, Excited, and Closed variants you control through shader parameters.',
+      'Interactive response via MaterialPropertyBlock on player proximity and teleport events.',
+      'Layered ring and matrix-tunnel stack with view-dependent parallax; perspective warp gives depth as the camera moves.'
+    ],
+
+    challenge:
+      'I needed a portal that stayed readable across Calm, Excited, and Closed states while keeping the effect procedural and easy to extend.',
+
+    solution:
+      'I built one HLSL shader with layered procedural motion and parameter-driven states, so approach, entry, and exit each read clear without new textures.',
+
+    media: [
+      {
+        type: 'youtube',
+        src: 'https://www.youtube.com/embed/Fb-auztimjs',
+        alt: 'Rat Trap — Challenge Room Portal'
+      }
+    ],
   }),
 
   createProject({
@@ -417,17 +514,22 @@ window.PROJECTS = [
     media: [
       {
         type: 'youtube',
-        src: 'https://www.youtube.com/embed/soqNu4WyOj8'
+        src: 'https://www.youtube.com/embed/soqNu4WyOj8',
+        alt: 'Shiro — Interactive Water Rendering'
       }
     ],
-    stack: ['Unity', 'Shader Graph', 'URP', 'Particles', 'Technical Art', '2D Rendering'],
-    role: 'Technical VFX Artist / Gameplay Programmer',
+    stack: ['Unity', 'Shader Graph', 'URP', 'Particle System', 'Technical Art', '2D Rendering'],
+    role: 'Technical VFX Artist · Gameplay Programmer',
     highlights: [
-      'Water shader that blends with SHIRO’s hand drawn style',
-      'Surface motion driven by player and gameplay interaction',
-      'Combined shader animation and secondary particles for better motion',
-      'Scalable design for various level scenarios'
+      'Water shader matched to SHIRO hand-drawn style.',
+      'Surface motion driven by player and gameplay interaction.',
+      'Shader animation plus sparse particles for surface motion.',
+      'Scalable setup reused across level scenarios.'
     ],
+    challenge:
+      'SHIRO levels needed water that reacted to movement without adding cost to combat scenes.',
+    solution:
+      'I built a lightweight Shader Graph water surface with ripples tied to gameplay triggers and sparse particles for surface motion.',
     links: {},
     section: 'showcase'
   }),
@@ -473,7 +575,8 @@ window.PROJECTS = [
     media: [
       {
         type: 'youtube',
-        src: 'https://www.youtube.com/embed/Y3AOkVdCMlg'
+        src: 'https://www.youtube.com/embed/Y3AOkVdCMlg',
+        alt: 'Shiro — Dash VFX'
       }
     ],
   }),
@@ -541,6 +644,67 @@ window.PROJECTS = [
     legacy: true,
     section: 'archive',
     legacyYear: '2020'
+  }),
+  createProject({
+    id: 'uni-thumb',
+
+    section: 'tools',
+
+    category: 'Unity Tools',
+
+    title: 'UniThumb',
+
+    subtitle:
+      'Scene & Prefab Thumbnails for the Project Window',
+
+    description:
+      'Renders a thumbnail per scene and prefab and pins it to the asset icon, so you can see contents without opening the asset. It replaces grey default icons with actual content previews.',
+
+    role:
+      'Solo Tool Developer',
+
+    stack: [
+      'Unity',
+      'C#',
+      'Editor Scripting',
+      'URP',
+      'HDRP',
+      'Render Textures',
+      'AssetDatabase'
+    ],
+
+    highlights: [
+      'One-click thumbnail generation with live preview before commit.',
+      'Prefab staging without opening Prefab Stage, with Undo support.',
+      'Scene View angle capture plus Orbit framing controls.',
+      'Per-shot lighting and exposure setup across URP 3D, URP 2D, and HDRP.',
+      'Volume post-processing, particle and VFX preroll, and overlay UI second pass.',
+      'Batch generation for whole folders with fill-missing-only and cancellable runs.',
+      'Regenerate on Save workflow plus GUID-named PNG storage with no .meta files.'
+    ],
+
+    challenge:
+      'A folder of grey Level_Final_v2 icons tells nothing until opened, and matching screen look across URP and HDRP pipelines is difficult.',
+
+    solution:
+      'I render actual-content icons via per-shot renderer, lighting, and exposure setup with preview-before-commit, stored as GUID-named PNGs in Library for solo work or Assets for teams.',
+
+    media: [
+      {
+        type: 'image',
+        src: 'https://github.com/MaykerStudio/uni-thumb/raw/main/Documentation~/images/thumbnails-comparison.png',
+        alt: 'UniThumb — Scene and prefab thumbnails in Project window'
+      },
+      {
+        type: 'image',
+        src: 'https://github.com/MaykerStudio/uni-thumb/raw/main/Documentation~/images/ui-main-window.png',
+        alt: 'UniThumb — Main window'
+      },
+    ],
+
+    links: {
+      github: 'https://github.com/MaykerStudio/uni-thumb'
+    }
   }),
   createProject({
     id: 'ai-editor',
@@ -614,7 +778,7 @@ window.PROJECTS = [
     }
   }),
   createProject({
-    id: 'rattrap-hitbox-synchronizer',
+    id: 'rat-trap-hitbox-synchronizer',
 
     section: 'tools',
 
@@ -642,14 +806,14 @@ window.PROJECTS = [
     ],
 
     highlights: [
-      'Multi-prefab hitbox synchronization',
-      'Shared gameplay component propagation',
-      'Runtime-safe serialized property copying',
-      'Custom split-view editor interface',
-      'Batch prefab editing workflows',
-      'Undo support and propagation logs',
-      'Searchable component inspector',
-      'Production iteration optimization'
+      'Multi-prefab hitbox synchronization.',
+      'Shared gameplay component propagation.',
+      'Runtime-safe serialized property copying.',
+      'Custom split-view editor interface.',
+      'Batch prefab editing workflows.',
+      'Undo support and propagation logs.',
+      'Searchable component inspector.',
+      'Production iteration optimization.'
     ],
 
     challenge:
@@ -673,7 +837,7 @@ window.PROJECTS = [
     links: {}
   }),
   createProject({
-    id: 'rattrap-room-loader',
+    id: 'rat-trap-room-loader',
 
     section: 'tools',
 
@@ -688,7 +852,7 @@ window.PROJECTS = [
       'A room-based workflow for Rat Trap that automates trigger generation, additive scene setup, and async room loading for large 2D maps. The tools also generate minimap snapshots and allow designers to jump to room scenes via the minimap.',
 
     role:
-      'Designed and implemented the editor tooling pipeline, trigger generation, scene loading workflow, minimap renderer, and navigation utilities.',
+      'Gameplay Programmer · Tools Programmer',
 
     stack: [
       'Unity',
@@ -702,12 +866,12 @@ window.PROJECTS = [
     ],
 
     highlights: [
-      'Automatic room trigger generation from collider geometry',
-      'Async additive scene loading pipeline',
-      'Editor-generated minimap screenshots from loaded scenes',
-      'Clickable minimap navigation for room editing',
-      'Grid-based room blocker generation',
-      'Custom Unity editor windows and scene utilities'
+      'Automatic room trigger generation from collider geometry.',
+      'Async additive scene loading pipeline.',
+      'Editor-generated minimap screenshots from loaded scenes.',
+      'Clickable minimap navigation for room editing.',
+      'Grid-based room blocker generation.',
+      'Custom Unity editor windows and scene utilities.'
     ],
 
     challenge:
@@ -750,7 +914,7 @@ window.PROJECTS = [
       'A searchable animation workflow for Shiro that allows developers to locate Animator Controllers, filter clips, preview animations, and jump to associated prefabs.',
 
     role:
-      'Designed and implemented the editor tool, including controller indexing, search, prefab navigation, and editor playback controls.',
+      'Gameplay Programmer · Tools Programmer',
 
     stack: [
       'Unity',
@@ -764,12 +928,12 @@ window.PROJECTS = [
     ],
 
     highlights: [
-      'Project-wide Animator Controller scanning',
-      'Direct Animation Window integration',
-      'Built-in animation playback controls',
-      'Controller sorting by animation count',
-      'Prefab Mode workflow support',
-      'Rapid animation discovery pipeline'
+      'Project-wide Animator Controller scanning.',
+      'Direct Animation Window integration.',
+      'Built-in animation playback controls.',
+      'Controller sorting by animation count.',
+      'Prefab Mode workflow support.',
+      'Rapid animation discovery pipeline.'
     ],
 
     challenge:
