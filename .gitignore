@@ -4,3 +4,7 @@
 !.dev.vars.example
 .env*
 !.env.example
+
+# local-only docs and dev state (portfolio repo stays asset-only)
+docs/
+.openchamber/
